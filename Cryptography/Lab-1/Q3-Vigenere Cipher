@@ -1,0 +1,38 @@
+def vigenere_encrypt(plaintext, key):
+    ciphertext = []
+    key_length = len(key)
+    for i, char in enumerate(plaintext):
+        if char.isalpha():
+            shift = ord(key[i % key_length].upper()) - ord('A')
+            encrypted_char = chr((ord(char.upper()) - ord('A') + shift) % 26 + ord('A'))
+            ciphertext.append(encrypted_char)
+        else:
+            ciphertext.append(char)
+    return ''.join(ciphertext)
+
+def vigenere_decrypt(ciphertext, key):
+    plaintext = []
+    key_length = len(key)
+    for i, char in enumerate(ciphertext):
+        if char.isalpha():
+            shift = ord(key[i % key_length].upper()) - ord('A')
+            decrypted_char = chr((ord(char.upper()) - ord('A') - shift + 26) % 26 + ord('A'))
+            plaintext.append(decrypted_char)
+        else:
+            plaintext.append(char)
+    return ''.join(plaintext)
+
+# Your full name
+full_name = "NURINSHRESTHA"  # Replace with your full name in uppercase
+
+# Key for the Vigenere Cipher
+key = "KEYWORD"  # Replace with your desired key
+
+# Encrypt the full name
+encrypted_name = vigenere_encrypt(full_name, key)
+# Decrypt the full name
+decrypted_name = vigenere_decrypt(encrypted_name, key)
+
+print(f"Original Name: {full_name}")
+print(f"Encrypted Name: {encrypted_name}")
+print(f"Decrypted Name: {decrypted_name}")
